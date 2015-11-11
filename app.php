@@ -22,7 +22,7 @@ $di->set('router' , function () use ($router){
 });
 
 // 注入redis缓存服务
-$di->set('redis' , function(){
+$di->setShared('redis' , function(){
 	$redis = new \Swoole\Cache\Redis(array(
 		'host'		=>	'127.0.0.1',
 		'port'		=>	6379,
@@ -41,6 +41,8 @@ $di->set('mongo', function(){
 		));
 	return $mongo;
 });
+
+
 
 
 // 注入swoole回调

@@ -42,7 +42,6 @@ class Dispatcher{
 			}else{
 				$app_name = explode('/', APP_PATH);
 				$class = '\\'.ucfirst($app_name[1]).'\\Controller\\'.$c.'Controller';
-				print_r($this->di);
 				$this->controller[$code] = new $class($this->di);
 				$controller = $this->controller[$code];
 			}
