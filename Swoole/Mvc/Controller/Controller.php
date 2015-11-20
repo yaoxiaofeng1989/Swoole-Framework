@@ -34,18 +34,9 @@ class Controller implements \Swoole\Interfaces\Controller{
 	public function broadcast($data){
 		// 打包数据
 		$data = DataParser::encode($data);
-		$start_fd = 0;
-        while (true) {
-            $conn_list = $this->serv->connection_list($start_fd, 10);
-            if ($conn_list === false) {
-                break;
-            }
-            $start_fd = end($conn_list);
-
-            foreach ($conn_list as $fd) {
-                $this->serv->send($fd, $data);
-            }
-        }
+        foreach($server->connections as $fd){
+		    $server->send($fd, $data);
+		}
 	}
 
 
